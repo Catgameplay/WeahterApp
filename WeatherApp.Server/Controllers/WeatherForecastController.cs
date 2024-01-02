@@ -18,8 +18,8 @@ namespace WeatherApp.Server.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet(Name = "RandomWeather")]
+        public IEnumerable<WeatherForecast> RandomWeather()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
