@@ -1,3 +1,5 @@
+using WeatherApp.Server.DTO;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +12,8 @@ builder.Services.AddSwaggerGen(options =>
     options.CustomSchemaIds(type => type.FullName); // Use the type's full name as the schema ID
     // Other Swagger configuration...
 });
+
+builder.Services.Configure<OpenWeather>(builder.Configuration.GetSection("OpenWeather"));
 
 var app = builder.Build();
 
