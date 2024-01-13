@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WeatherApp.Server.DTO;
+using WeatherApp.Server.Interfaces;
 
 namespace WeatherApp.Server.Controllers
 {
@@ -15,12 +16,17 @@ namespace WeatherApp.Server.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger,
-                                         IOptions<OpenWeather> openWeather)
+        private readonly HttpClient _httpClient;
+        private readonly IUrlBuilderInterface _urlBuilder;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IOptions<OpenWeather> openWeather,
+            IHttpClientFactory factory, IUrlBuilderInterface urlBuilder)
         {
-            _logger = logger;
+            
+
+            _httpClient = factory.CreateClient("OpenWeatherClient");
             _openWeather = openWeather.Value;
+            _urlBuilder = urlBuilder;
+            _logger = logger;
         }
 
         [HttpGet(Name = "RandomWeather")]
