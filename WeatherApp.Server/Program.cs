@@ -13,7 +13,7 @@ builder.Services.AddHttpClient("OpenWeatherClient", client =>
 {
     // Configure your HttpClient options here
     client.BaseAddress = new Uri("https://openweathermap.org/");
-    // Additional configuration if needednuhuh...
+    // Additional configuration if needed nuhuh...
 });
 
 builder.Services.AddTransient<IUrlBuilderInterface, UrlBuilderService>();
