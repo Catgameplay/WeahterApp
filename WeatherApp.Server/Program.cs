@@ -4,6 +4,7 @@ using WeatherApp.Server.DTO;
 using WeatherApp.Server.Interfaces;
 using WeatherApp.Server.Services;
 using WeatherApplication.Server.Data;
+using WeatherApplication.Server.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +14,13 @@ builder.Services.AddHttpClient("OpenWeatherClient", client =>
 {
     // Configure your HttpClient options here
     client.BaseAddress = new Uri("https://openweathermap.org/");
-    // Additional configuration if needed nuhuh...
+    // Nuhuh...
 });
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddTransient<IUrlBuilderInterface, UrlBuilderService>();
+builder.Services.AddTransient<ITenantFinderInterface, TenantFinderServices>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
